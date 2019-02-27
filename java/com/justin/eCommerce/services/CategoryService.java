@@ -3,6 +3,8 @@ package com.justin.eCommerce.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Service;
 
 import com.justin.eCommerce.models.Category;
@@ -30,6 +32,16 @@ private final CatRepo catRepo;
 		}else {
 			return null;
 		}
+	}
+
+	public Category createCategory(@Valid Category newcategory) {
+		return catRepo.save(newcategory);
+		
+	}
+
+	public void deleteCategory(Long id) {
+		catRepo.deleteById(id);
+		
 	}
 
 }

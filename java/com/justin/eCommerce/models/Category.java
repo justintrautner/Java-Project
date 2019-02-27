@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="categories")
@@ -23,6 +24,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min=1, message="Cannot be empty")
     private String tag;
     @Column(updatable=false)
     private Date createdAt;

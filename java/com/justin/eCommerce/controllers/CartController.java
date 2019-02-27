@@ -5,12 +5,14 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.justin.eCommerce.models.Wine;
 import com.justin.eCommerce.services.WineService;
@@ -27,6 +29,7 @@ public class CartController {
 //	ADD TO CART
 	@SuppressWarnings("unchecked")
 	@PostMapping("/add")
+	@ResponseStatus( HttpStatus.OK )
 	public void addToCart(HttpSession session, @RequestParam("id") String id, Model model) {
 		ArrayList<HashMap<String, String>> cart = (ArrayList<HashMap<String, String>>) session.getAttribute("cart");
 		HashMap<String, String> product = new HashMap<String, String>();

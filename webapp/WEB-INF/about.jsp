@@ -7,34 +7,33 @@
 <meta charset="UTF-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop</title>
+<title>About</title>
 <link rel="stylesheet" type="text/css" href="css/foundation.css">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <link rel="stylesheet"
 	href="icons/foundation-icons/foundation-icons.css">
 <link href="https://fonts.googleapis.com/css?family=Tangerine"
 	rel="stylesheet">
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
 
-	<!-- Off canvas -->
 	<div class="off-canvas position-left" id="offCanvas" data-off-canvas>
 		<!-- Mobile Menu -->
 		<ul class="vertical menu accordion-menu" data-accordion-menu>
 			<li><a href="/cart" id="cart-tag"> <i
 					class="fi-shopping-cart" id="lg-cart"></i> <span
-					class="badge primary cart-total-mobile" id="cart-badge"> <c:out
+					class="badge primary cart-total" id="cart-badge"> <c:out
 							value="${cart[0].total}" /></span>
 			</a></li>
-			<li><a href="" class="">Shop</a>
+			<li><a href="/shop" class="">Shop</a>
 				<ul class="menu vertical nested">
 					<li><a href="/shop">All</a></li>
 					<li><a href="">Reds</a></li>
 					<li><a href="">Whites</a></li>
 				</ul></li>
-			<li><a href="/about" class="">About us</a></li>
+			<li><a href="" class="">About us</a></li>
 			<li><a href="" class="">Contact</a></li>
 		</ul>
 	</div>
@@ -56,7 +55,7 @@
 							<li><a href="">Reds</a></li>
 							<li><a href="">Whites</a></li>
 						</ul></li>
-					<li><a href="/about">About us</a></li>
+					<li><a href="#">About us</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
 			</div>
@@ -75,83 +74,28 @@
 			</div>
 		</div>
 	</div>
-
+	<!-- Breadcrumbs -->
 	<div class="grid-container">
 		<div class="grid-x">
 			<nav aria-label="You are here:" role="navigation" class="mt-3">
 				<ul class="breadcrumbs">
 					<li><a href="/">Home</a></li>
-					<li><span class="show-for-sr">Current: </span> Wines</li>
+					<li><span class="show-for-sr">Current: </span>About</li>
 				</ul>
 			</nav>
 		</div>
 	</div>
 
-	<!-- BODY -->
-	<div class="grid-y medium-grid-frame">
-		<div class="cell medium-auto medium-cell-block-container">
-			<div class="grid-x grid-padding-x">
-				<div class="cell medium-3">
-					<ul class="vertical menu accordion-menu" data-accordion-menu>
-						<li><a href="#">Category</a>
-							<ul class="menu vertical nested">
-								<li><a value="0" class="cat-filter strong">All</a></li>
-								<c:forEach items="${allCats}" var="cat">
-									<li><a value="${cat.id }" class="cat-filter"><c:out
-												value="${cat.tag}" /></a></li>
-								</c:forEach>
-							</ul></li>
-						<li><a href="#">Price</a>
-							<ul class="menu vertical nested">
-								<li><a value="0" class="price-filter strong">All</a></li>
-								<li><a value="25" class="price-filter">Under $25</a></li>
-								<li><a value="50" class="price-filter">Under $50</a></li>
-								<li><a value="51" class="price-filter">$50+</a></li>
-							</ul></li>
-					</ul>
-				</div>
-				<p class="callback"></p>
-				<div class="cell medium-9 medium-cell-block-y">
-					<div class="grid-container">
-						<div class="grid-x grid-margin-x wine-data">
-							<c:forEach items="${allWines}" var="wine">
-								<div class="cell medium-6 small-12 large-4">
-									<div class="card">
+	<!-- Body -->
+	<div class="grid-container" id="hadj">
 
-										<img src="${wine.image}" alt="" />
+		<h1>About</h1>
 
-										<div class="card-section">
-											<div class="flex-container align-justify align-middle">
-												<h4>
-													<a href="/wine${wine.id }"> <c:out value="${wine.name}" />
-													</a>
-												</h4>
-												<h5>
-													$
-													<c:out value="${wine.price}" />
-												</h5>
-											</div>
-											<p>
-												<c:out value="${wine.description}" />
-											</p>
-											<div class="flex-container align-right">
-												<button class="hollow button expanded add-to-cart"
-													value="${wine.id}">
-													<div class="flex-container align-justify">
-														Add to Cart <i class="fi-shopping-cart"></i>
-													</div>
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
+
+
+
+
 	<!-- Footer -->
 	<div class="grid-container fluid bsf" id="footer">
 		<div class="grid-x align-center">
@@ -183,14 +127,11 @@
 		</div>
 	</div>
 
-
 	<script src="js/vendor/jquery.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src="js/vendor/what-input.js"></script>
 	<script src="js/vendor/foundation.min.js"></script>
 	<script src="js/app.js"></script>
+
 </body>
-
 </html>
-
-

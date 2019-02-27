@@ -7,13 +7,15 @@
 <meta charset="UTF-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home</title>
+<title>Cart</title>
 <link rel="stylesheet" type="text/css" href="css/foundation.css">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <link rel="stylesheet"
 	href="icons/foundation-icons/foundation-icons.css">
 <link href="https://fonts.googleapis.com/css?family=Tangerine"
 	rel="stylesheet">
+	<link rel="stylesheet"
+	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
 
@@ -21,7 +23,12 @@
 	<div class="off-canvas position-left" id="offCanvas" data-off-canvas>
 		<!-- Mobile Menu -->
 		<ul class="vertical menu accordion-menu" data-accordion-menu>
-			<li><a href="" class="">Shop</a>
+			<li><a href="/cart" id="cart-tag"> <i
+					class="fi-shopping-cart" id="lg-cart"></i> <span
+					class="badge primary cart-total" id="cart-badge"> <c:out
+							value="${cart[0].total}" /></span>
+			</a></li>
+			<li><a href="/shop">Shop</a>
 				<ul class="menu vertical nested">
 					<li><a href="/shop">All</a></li>
 					<li><a href="">Reds</a></li>
@@ -43,7 +50,7 @@
 			<div class="top-bar-left">
 				<ul class="dropdown menu" data-dropdown-menu>
 					<li class="menu-text fancy-text" id="p-0">Fancy Estates</li>
-					<li><a href="#">Shop</a>
+					<li><a href="/shop">Shop</a>
 						<ul class="menu vertical">
 							<li><a href="/shop">All</a></li>
 							<li><a href="">Reds</a></li>
@@ -55,7 +62,7 @@
 			</div>
 			<div class="top-bar-right">
 				<ul class="menu">
-					<li><input type="search" placeholder="Search"></li>
+					<li><input type="search" placeholder="Search" id="search-wines"></li>
 					<li><button type="button" class="button">Search</button></li>
 					<li><a href="/cart" id="cart-tag"> <i
 							class="fi-shopping-cart" id="lg-cart"></i> <span
@@ -101,7 +108,7 @@
 								<c:forEach items="${cartItems}" var="item" begin="1"
 									varStatus="loop">
 									<tr>
-										<td><a href="wine/${item.id}"> <c:out
+										<td><a href="wine${item.id}"> <c:out
 													value="${item.name}" />
 										</a></td>
 										<td>$<c:out value="${item.price}" /></td>
@@ -122,7 +129,7 @@
 							</tbody>
 						</table>
 						<div class="flex-container align-right">
-							
+
 
 							<form action="/checkout" method="POST">
 								<script src="https://checkout.stripe.com/checkout.js"
@@ -131,8 +138,7 @@
 									data-amount="${amount}" data-name="Fancy Estates Winery"
 									data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
 									data-label="Checkout" data-locale="auto"
-									data-shipping-address="true"
-									data-billing-address="true">
+									data-shipping-address="true" data-billing-address="true">
 									
 								</script>
 							</form>
@@ -177,8 +183,8 @@
 	</div>
 
 
-	
 	<script src="js/vendor/jquery.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src="js/vendor/what-input.js"></script>
 	<script src="js/vendor/foundation.min.js"></script>
 	<script src="js/app.js"></script>
