@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.justin.eCommerce.models.Category;
@@ -49,8 +50,9 @@ public class AdminController {
 	}
 //	CREATE CATEGORY PAGE
 	@GetMapping("/admincreatecategory")
-	public String createCategory(@Valid @ModelAttribute("newcategory") Category newcategory) {
-		
+	public String createCategory(Model model, @Valid @ModelAttribute("newcategory") Category newcategory) {
+		List<Category> cats=catService.findAll();
+		model.addAttribute("cats", cats);
 		return "createCategory.jsp";
 	}
 //	CREATE CATEGORY REQUEST
@@ -95,6 +97,53 @@ public class AdminController {
 	@GetMapping("/delete/wine/{id}")
 	public String deleteWine(@PathVariable("id") Long id) {
 		wineService.deleteWine(id);
+		return "redirect:/admin";
+	}
+//	EDIT WINE
+	@GetMapping("/editwine{id}")
+	public String editWine(@PathVariable("id") Long id, Model model, @Valid @ModelAttribute("updatedWine") Wine updatedWine) {
+		Wine wine = wineService.findWineById(id);
+		model.addAttribute("wine", wine);
+		List<Category> cats = catService.findAll();
+		model.addAttribute("cats", cats);
+		// Other Categories
+		List<Category> others = catService.findCategoriesNotInWine(id);
+		model.addAttribute("others", others);
+		return "editWine.jsp";
+	}
+//	EDIT REQUEST
+	@PutMapping("/edit/wine/{id}")
+	public String putWine(@PathVariable("id") Long id, @Valid @ModelAttribute("updatedWine") Wine updatedWine, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "redirect:/editwine"+id;
+		}else {
+			Wine wine = wineService.findWineById(id);
+			updatedWine.setCategories(wine.getCategories());
+			wineService.updateWine(updatedWine);
+			return "redirect:/admin";
+		}
+		
+	}
+//	ADD CATEGORY
+	@PostMapping("/edit/wine/{id}")
+	public String addCategory(@PathVariable("id") Long id, @RequestParam("categoryId") Long categoryId) {
+		Category category = catService.findCategoryById(categoryId);
+		Wine wine = wineService.findWineById(id);
+		List <Category> catList = wine.getCategories();
+		catList.add(category);
+		wine.setCategories(catList);
+		wineService.updateWine(wine);
+		return "redirect:/admin";
+	}
+//	REMOVE CATEGORY
+	@PostMapping("/edit/wine/{id}/remove")
+	public String removeCategory(@PathVariable("id") Long id, @RequestParam("idx") int idx) {
+		Wine wine = wineService.findWineById(id);
+		List<Category> catList = wine.getCategories();
+		catList.remove(idx);
+		wine.setCategories(catList);
+		wineService.updateWine(wine);
 		return "redirect:/admin";
 	}
 	

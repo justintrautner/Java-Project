@@ -31,11 +31,12 @@
 			<li><a href="" class="">Shop</a>
 				<ul class="menu vertical nested">
 					<li><a href="/shop">All</a></li>
-					<li><a href="">Reds</a></li>
-					<li><a href="">Whites</a></li>
+					<c:forEach items="${cats}" var="cat">
+						<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
+					</c:forEach>
 				</ul></li>
-			<li><a href="/about" class="">About us</a></li>
-			<li><a href="" class="">Contact</a></li>
+			<li><a href="/about">About us</a></li>
+			<li><a href="/contact">Contact</a></li>
 		</ul>
 	</div>
 
@@ -53,11 +54,12 @@
 					<li><a href="/shop">Shop</a>
 						<ul class="menu vertical">
 							<li><a href="/shop">All</a></li>
-							<li><a href="">Reds</a></li>
-							<li><a href="">Whites</a></li>
+							<c:forEach items="${cats}" var="cat">
+						<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
+					</c:forEach>
 						</ul></li>
 					<li><a href="/about">About us</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 			</div>
 			<div class="top-bar-right">
@@ -96,7 +98,7 @@
 						<li><a href="#">Category</a>
 							<ul class="menu vertical nested">
 								<li><a value="0" class="cat-filter strong">All</a></li>
-								<c:forEach items="${allCats}" var="cat">
+								<c:forEach items="${cats}" var="cat">
 									<li><a value="${cat.id }" class="cat-filter"><c:out
 												value="${cat.tag}" /></a></li>
 								</c:forEach>
@@ -169,8 +171,8 @@
 			<div class="cell small-8 medium-3">
 				<div class="flex-container align-justify">
 					<a href="/about" class="strong">About Us</a>
-					<p class="strong">FAQs</p>
-					<p class="strong">Contact Us</p>
+					<a href="#" class="strong">FAQs</a>
+					<a href="/contact" class="strong">Contact Us</a>
 				</div>
 			</div>
 		</div>

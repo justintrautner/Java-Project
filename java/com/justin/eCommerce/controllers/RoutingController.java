@@ -38,8 +38,9 @@ public class RoutingController {
 			cart.add(total);
 			session.setAttribute("cart", cart);
 		}
+		List<Category> cats =catService.findAll();
+		model.addAttribute("cats", cats);
 		model.addAttribute("cart", session.getAttribute("cart"));
-
 		return "index.jsp";
 	}
 
@@ -56,9 +57,9 @@ public class RoutingController {
 		} else {
 			model.addAttribute("cart", session.getAttribute("cart"));
 		}
-		List<Category> allCats = catService.findAll();
+		List<Category> cats = catService.findAll();
 		List<Wine> allWines = wineService.findAll();
-		model.addAttribute("allCats", allCats);
+		model.addAttribute("cats", cats);
 		model.addAttribute("allWines", allWines);
 		session.setAttribute("cat-filter", Long.valueOf(0));
 		session.setAttribute("price-filter", (float) 0);
@@ -78,6 +79,8 @@ public class RoutingController {
 		} else {
 			model.addAttribute("cart", session.getAttribute("cart"));
 		}
+		List<Category> cats =catService.findAll();
+		model.addAttribute("cats", cats);
 		Wine wine = wineService.findWineById(id);
 		model.addAttribute("wine", wine);
 		return "oneWine.jsp";
@@ -85,9 +88,20 @@ public class RoutingController {
 
 //	ABOUT
 	@GetMapping("/about")
-	public String about() {
+	public String about(Model model) {
+		List<Category> catList =catService.findAll();
+		model.addAttribute("cats", catList);
 
 		return "about.jsp";
+	}
+	
+//	CONTACT
+	@GetMapping("/contact")
+	public String contact(Model model) {
+		List<Category> catList =catService.findAll();
+		model.addAttribute("cats", catList);
+
+		return "contact.jsp";
 	}
 
 }

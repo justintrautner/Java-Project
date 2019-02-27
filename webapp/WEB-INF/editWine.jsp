@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About</title>
+<title>Admin</title>
 <link rel="stylesheet" type="text/css" href="css/foundation.css">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <link rel="stylesheet"
@@ -33,10 +34,9 @@
 					<c:forEach items="${cats}" var="cat">
 						<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
 					</c:forEach>
-
 				</ul></li>
-			<li><a href="#" class="">About us</a></li>
-			<li><a href="/contact" class="">Contact</a></li>
+			<li><a href="/about">About us</a></li>
+			<li><a href="/contact">Contact</a></li>
 		</ul>
 	</div>
 
@@ -58,7 +58,7 @@
 								<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
 							</c:forEach>
 						</ul></li>
-					<li><a href="#">About us</a></li>
+					<li><a href="/about">About us</a></li>
 					<li><a href="/contact">Contact</a></li>
 				</ul>
 			</div>
@@ -83,7 +83,8 @@
 			<nav aria-label="You are here:" role="navigation" class="mt-3">
 				<ul class="breadcrumbs">
 					<li><a href="/">Home</a></li>
-					<li><span class="show-for-sr">Current: </span>About</li>
+					<li><a href="/admin">Admin</a></li>
+					<li><span class="show-for-sr">Current: </span>Edit</li>
 				</ul>
 			</nav>
 		</div>
@@ -91,14 +92,49 @@
 
 	<!-- Body -->
 	<div class="grid-container" id="hadj">
-
-		<h1>About</h1>
+		<h3>Edit</h3>
+		<form:form action="/edit/wine/${wine.id}" method="post"
+			modelAttribute="updatedWine">
+			<input type="hidden" name="_method" value="put">
+			<p>
+				<form:label path="name">Name: </form:label>
+				<form:input path="name" value="${wine.name}" />
+			</p>
+			<p>
+				<form:errors path="name" />
+			</p>
+			<p>
+				<form:label path="description">Description: </form:label>
+				<form:input path="description" value="${wine.description}" />
+			</p>
+			<p>
+				<form:label path="image">Image: </form:label>
+				<form:input path="image" value="${wine.image}" />
+			</p>
+			<p>
+				<form:label path="price">Price: </form:label>
+				<form:input path="price" value="${wine.price}" />
+			</p>
+			<input type="submit" value="Confirm Edit" class="button success">
+		</form:form>
+		<h3>Add Category</h3>
+		<form action="/edit/wine/${wine.id}" method="post">
+			<select name="categoryId">
+				<c:forEach items="${others }" var="other">
+					<option value="${other.id }"><c:out value="${ other.tag}"></c:out></option>
+				</c:forEach>
+			</select> <input type="submit" value="Add Category" class="button success">
+		</form>
+		<h3>Remove Category</h3>
+		<form action="/edit/wine/${wine.id}/remove" method="post">
+			<select name="idx">
+				<c:forEach items="${wine.categories }" var="cat" varStatus="loop">
+					<option value="${loop.index}"><c:out value="${ cat.tag}"></c:out></option>
+				</c:forEach>
+			</select> <input type="submit" value="Remove Category" class="button alert">
+		</form>
 
 	</div>
-
-
-
-
 	<!-- Footer -->
 	<div class="grid-container fluid bsf" id="footer">
 		<div class="grid-x align-center">

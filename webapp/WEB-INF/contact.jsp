@@ -35,7 +35,7 @@
 					</c:forEach>
 
 				</ul></li>
-			<li><a href="#" class="">About us</a></li>
+			<li><a href="/about" class="">About us</a></li>
 			<li><a href="/contact" class="">Contact</a></li>
 		</ul>
 	</div>
@@ -58,7 +58,7 @@
 								<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
 							</c:forEach>
 						</ul></li>
-					<li><a href="#">About us</a></li>
+					<li><a href="/about">About us</a></li>
 					<li><a href="/contact">Contact</a></li>
 				</ul>
 			</div>
@@ -83,7 +83,7 @@
 			<nav aria-label="You are here:" role="navigation" class="mt-3">
 				<ul class="breadcrumbs">
 					<li><a href="/">Home</a></li>
-					<li><span class="show-for-sr">Current: </span>About</li>
+					<li><span class="show-for-sr">Current: </span>Contact</li>
 				</ul>
 			</nav>
 		</div>
@@ -92,7 +92,7 @@
 	<!-- Body -->
 	<div class="grid-container" id="hadj">
 
-		<h1>About</h1>
+		<h1>Contact</h1>
 
 	</div>
 

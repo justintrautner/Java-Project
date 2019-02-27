@@ -2,6 +2,7 @@ package com.justin.eCommerce.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,16 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.justin.eCommerce.models.Category;
 import com.justin.eCommerce.models.Wine;
+import com.justin.eCommerce.services.CategoryService;
 import com.justin.eCommerce.services.WineService;
 
 @Controller
 public class CartController {
 	
 	private final WineService wineService;
+	private final CategoryService catService;
 
-	public CartController(WineService wineService) {
+	public CartController(WineService wineService, CategoryService catService) {
 		this.wineService = wineService;
+		this.catService= catService;
 	}
 	
 //	ADD TO CART
@@ -94,6 +99,8 @@ public class CartController {
 						* 100);
 		model.addAttribute("amount", amount);
 		session.setAttribute("amount", amount);
+		List<Category> cats = catService.findAll();
+		model.addAttribute("cats", cats);
 		return "cart.jsp";
 
 	}

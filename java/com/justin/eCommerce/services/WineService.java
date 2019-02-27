@@ -67,4 +67,9 @@ public class WineService {
 		
 	}
 
+	public Wine updateWine(@Valid Wine updatedWine) {
+		
+		return wineRepo.save(updatedWine);
+	}
+
 }

@@ -14,7 +14,7 @@
 	href="icons/foundation-icons/foundation-icons.css">
 <link href="https://fonts.googleapis.com/css?family=Tangerine"
 	rel="stylesheet">
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
@@ -30,11 +30,12 @@
 			<li><a href="/shop" class="">Shop</a>
 				<ul class="menu vertical nested">
 					<li><a href="/shop">All</a></li>
-					<li><a href="">Reds</a></li>
-					<li><a href="">Whites</a></li>
+					<c:forEach items="${cats}" var="cat">
+						<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
+					</c:forEach>
 				</ul></li>
-			<li><a href="" class="">About us</a></li>
-			<li><a href="" class="">Contact</a></li>
+			<li><a href="/about" class="">About us</a></li>
+			<li><a href="/contact" class="">Contact</a></li>
 		</ul>
 	</div>
 
@@ -52,11 +53,12 @@
 					<li><a href="/shop">Shop</a>
 						<ul class="menu vertical">
 							<li><a href="/shop">All</a></li>
-							<li><a href="">Reds</a></li>
-							<li><a href="">Whites</a></li>
+							<c:forEach items="${cats}" var="cat">
+								<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
+							</c:forEach>
 						</ul></li>
-					<li><a href="#">About us</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="/about">About us</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 			</div>
 			<div class="top-bar-right">
@@ -90,11 +92,12 @@
 	<div class="grid-container" id="hadj">
 
 		<h1>Admin</h1>
-		<a class="button success" href="/admincreatewine">Create Wine</a>
-		<a class="button success" href="/admincreatecategory">Create Category</a>
+		<a class="button success" href="/admincreatewine">Create Wine</a> <a
+			class="button success" href="/admincreatecategory">Create
+			Category</a>
 		<ul class="accordion" data-accordion data-multi-expand="true">
-			<li class="accordion-item is-active" data-accordion-item>
-				<a href="#" class="accordion-title">Wines</a>
+			<li class="accordion-item is-active" data-accordion-item><a
+				href="#" class="accordion-title">Wines</a>
 				<div class="accordion-content" data-tab-content>
 					<table class="stack">
 						<thead>
@@ -116,42 +119,36 @@
 									<td><c:out value="${wine.price}" /></td>
 									<td><c:forEach items="${wine.categories}" var="cat">
 											<c:out value="${cat.tag}" />
-										</c:forEach>
-									</td>
-									<td>
-										<a class="button warning" href="/edit/wine/${wine.id }">Edit</a>
+										</c:forEach></td>
+									<td><a class="button warning" href="/editwine${wine.id }">Edit</a>
 										<a class="button alert" href="/delete/wine/${wine.id }">Delete</a>
 									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
-			</li>
-			<li class="accordion-item" data-accordion-item>
-				<a href="#" class="accordion-title">Categories</a>
+				</div></li>
+			<li class="accordion-item" data-accordion-item><a href="#"
+				class="accordion-title">Categories</a>
 				<div class="accordion-content" data-tab-content>
-      				<table class="stack">
-      					<thead>
-      						<tr>
-      							<th>Tag</th>
-      							<th>Action</th>
-      						</tr>
-      					</thead>
-      					<tbody>
-      						<c:forEach items="${cats}" var="cat">
-      							<tr>
-      								<td><c:out value="${ cat.tag}"/></td>
-      								<td>
-      									<a class="button warning" href="/edit/cat/${cat.id }">Edit</a>
-										<a class="button alert" href="/delete/cat/${cat.id }">Delete</a>
+					<table class="stack">
+						<thead>
+							<tr>
+								<th>Tag</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${cats}" var="cat">
+								<tr>
+									<td><c:out value="${ cat.tag}" /></td>
+									<td><a class="button alert" href="/delete/cat/${cat.id }">Delete</a>
 									</td>
-      							</tr>
-      						</c:forEach>
-      					</tbody>
-      				</table>
-    			</div>
-			</li>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div></li>
 		</ul>
 
 
@@ -173,9 +170,9 @@
 		<div class="grid-x align-center">
 			<div class="cell small-8 medium-3">
 				<div class="flex-container align-justify">
-					<a href="/about" class="strong">About Us</a>
-					<p class="strong">FAQs</p>
-					<p class="strong">Contact Us</p>
+					<a href="/about" class="strong">About Us</a> <a href="#"
+						class="strong">FAQs</a> <a href="/contact" class="strong">Contact
+						Us</a>
 				</div>
 			</div>
 		</div>
@@ -189,7 +186,8 @@
 	</div>
 
 	<script src="js/vendor/jquery.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src="js/vendor/what-input.js"></script>
 	<script src="js/vendor/foundation.min.js"></script>
 	<script src="js/app.js"></script>

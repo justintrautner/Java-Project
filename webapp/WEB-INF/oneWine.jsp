@@ -14,7 +14,7 @@
 	href="icons/foundation-icons/foundation-icons.css">
 <link href="https://fonts.googleapis.com/css?family=Tangerine"
 	rel="stylesheet">
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
@@ -30,11 +30,12 @@
 			<li><a href="/shop" class="">Shop</a>
 				<ul class="menu vertical nested">
 					<li><a href="/shop">All</a></li>
-					<li><a href="">Reds</a></li>
-					<li><a href="">Whites</a></li>
+					<c:forEach items="${cats}" var="cat">
+						<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
+					</c:forEach>
 				</ul></li>
-			<li><a href="/about" class="">About us</a></li>
-			<li><a href="" class="">Contact</a></li>
+			<li><a href="/about">About us</a></li>
+			<li><a href="/contact">Contact</a></li>
 		</ul>
 	</div>
 
@@ -52,11 +53,12 @@
 					<li><a href="/shop">Shop</a>
 						<ul class="menu vertical">
 							<li><a href="/shop">All</a></li>
-							<li><a href="">Reds</a></li>
-							<li><a href="">Whites</a></li>
+							<c:forEach items="${cats}" var="cat">
+								<li><a href="/shop"><c:out value="${cat.tag}" /></a></li>
+							</c:forEach>
 						</ul></li>
 					<li><a href="/about">About us</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="/contatc">Contact</a></li>
 				</ul>
 			</div>
 			<div class="top-bar-right">
@@ -81,8 +83,8 @@
 				<ul class="breadcrumbs">
 					<li><a href="/">Home</a></li>
 					<li><a href="/shop">Wines</a></li>
-					<li><span class="show-for-sr">Current: </span>
-					<c:out value="${wine.name}" /></li>
+					<li><span class="show-for-sr">Current: </span> <c:out
+							value="${wine.name}" /></li>
 				</ul>
 			</nav>
 		</div>
@@ -136,9 +138,9 @@
 		<div class="grid-x align-center">
 			<div class="cell small-8 medium-3">
 				<div class="flex-container align-justify">
-					<a href="/about" class="strong">About Us</a>
-					<p class="strong">FAQs</p>
-					<p class="strong">Contact Us</p>
+					<a href="/about" class="strong">About Us</a> <a href="#"
+						class="strong">FAQs</a> <a href="/contact" class="strong">Contact
+						Us</a>
 				</div>
 			</div>
 		</div>
@@ -152,7 +154,8 @@
 	</div>
 
 	<script src="js/vendor/jquery.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src="js/vendor/what-input.js"></script>
 	<script src="js/vendor/foundation.min.js"></script>
 	<script src="js/app.js"></script>
