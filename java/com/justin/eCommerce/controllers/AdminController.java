@@ -2,7 +2,9 @@ package com.justin.eCommerce.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,10 @@ public class AdminController {
 
 //	DASHBOARD
 	@GetMapping("/admin")
-	public String dashboard(Model model) {
+	public String dashboard(Model model, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		List<Wine> wines = wineService.findAll();
 		List<Category> cats = catService.findAll();
 		model.addAttribute("cats", cats);
@@ -43,22 +48,30 @@ public class AdminController {
 
 //	CREATE WINE PAGE
 	@GetMapping("/admincreatewine")
-	public String createWine(Model model) {
+	public String createWine(Model model, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		List<Category> cats = catService.findAll();
 		model.addAttribute("cats", cats);
 		return "createWine.jsp";
 	}
 //	CREATE CATEGORY PAGE
 	@GetMapping("/admincreatecategory")
-	public String createCategory(Model model, @Valid @ModelAttribute("newcategory") Category newcategory) {
+	public String createCategory(Model model, @Valid @ModelAttribute("newcategory") Category newcategory, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		List<Category> cats=catService.findAll();
 		model.addAttribute("cats", cats);
 		return "createCategory.jsp";
 	}
 //	CREATE CATEGORY REQUEST
 	@PostMapping("/create/category")
-	public String postCategory(@Valid @ModelAttribute("newcategory") Category newcategory, BindingResult result) {
-		
+	public String postCategory(@Valid @ModelAttribute("newcategory") Category newcategory, BindingResult result, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		if(result.hasErrors()) {
 			return "createCategory.jsp";
 		}else {
@@ -69,11 +82,15 @@ public class AdminController {
 
 //	CREATE WINE REQUEST
 	@PostMapping("/create/wine")
-	public String postWine(@RequestParam("name") String name, 
+	public String postWine(HttpSession session,
+			@RequestParam("name") String name, 
 			@RequestParam("description") String description,
 			@RequestParam("image") String image, 
 			@RequestParam("price") Float price,
 			@RequestParam("catId") Long catId) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		Wine newWine = new Wine();
 		newWine.setName(name);
 		newWine.setDescription(description);
@@ -89,19 +106,28 @@ public class AdminController {
 	}
 //	DELETE CATEGORY
 	@GetMapping("/delete/cat/{id}")
-	public String deleteCategory(@PathVariable("id") Long id) {
+	public String deleteCategory(@PathVariable("id") Long id, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		catService.deleteCategory(id);
 		return "redirect:/admin";
 	}
 //	DELETE WINE
 	@GetMapping("/delete/wine/{id}")
-	public String deleteWine(@PathVariable("id") Long id) {
+	public String deleteWine(@PathVariable("id") Long id, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		wineService.deleteWine(id);
 		return "redirect:/admin";
 	}
 //	EDIT WINE
 	@GetMapping("/editwine{id}")
-	public String editWine(@PathVariable("id") Long id, Model model, @Valid @ModelAttribute("updatedWine") Wine updatedWine) {
+	public String editWine(@PathVariable("id") Long id, Model model, @Valid @ModelAttribute("updatedWine") Wine updatedWine, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		Wine wine = wineService.findWineById(id);
 		model.addAttribute("wine", wine);
 		List<Category> cats = catService.findAll();
@@ -113,8 +139,10 @@ public class AdminController {
 	}
 //	EDIT REQUEST
 	@PutMapping("/edit/wine/{id}")
-	public String putWine(@PathVariable("id") Long id, @Valid @ModelAttribute("updatedWine") Wine updatedWine, BindingResult result) {
-		
+	public String putWine(@PathVariable("id") Long id, @Valid @ModelAttribute("updatedWine") Wine updatedWine, BindingResult result, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		if(result.hasErrors()) {
 			return "redirect:/editwine"+id;
 		}else {
@@ -127,7 +155,10 @@ public class AdminController {
 	}
 //	ADD CATEGORY
 	@PostMapping("/edit/wine/{id}")
-	public String addCategory(@PathVariable("id") Long id, @RequestParam("categoryId") Long categoryId) {
+	public String addCategory(@PathVariable("id") Long id, @RequestParam("categoryId") Long categoryId, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		Category category = catService.findCategoryById(categoryId);
 		Wine wine = wineService.findWineById(id);
 		List <Category> catList = wine.getCategories();
@@ -138,13 +169,38 @@ public class AdminController {
 	}
 //	REMOVE CATEGORY
 	@PostMapping("/edit/wine/{id}/remove")
-	public String removeCategory(@PathVariable("id") Long id, @RequestParam("idx") int idx) {
+	public String removeCategory(@PathVariable("id") Long id, @RequestParam("idx") int idx, HttpSession session) {
+		if(session.getAttribute("admin")==null) {
+			return "redirect:/login";
+		}
 		Wine wine = wineService.findWineById(id);
 		List<Category> catList = wine.getCategories();
 		catList.remove(idx);
 		wine.setCategories(catList);
 		wineService.updateWine(wine);
 		return "redirect:/admin";
+	}
+//	LOGIN
+	@GetMapping("/login")
+	public String login() {
+		
+		return "login.jsp";
+	}
+//	LOGIN REQUEST
+	@PostMapping("/login")
+	public String loginAdmin(HttpSession session, @RequestParam Map<String,String> params) {
+		if(params.get("name").equals("admin") && params.get("password").equals("999999999")) {
+			session.setAttribute("admin", true);
+			return "redirect:/admin";
+		}else {
+			return "redirect:/login";
+		}	
+	}
+//	LOGOUT
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("admin");
+		return "redirect:/login";
 	}
 	
 	

@@ -31,6 +31,7 @@ public class Wine {
 	private String description;
 	private String image;
 	private float price;
+	private Boolean isFeatured = false;
     @Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
@@ -56,6 +57,12 @@ public class Wine {
     	
     }
     
+	public Boolean getIsFeatured() {
+		return isFeatured;
+	}
+	public void setIsFeatured(Boolean isFeatured) {
+		this.isFeatured = isFeatured;
+	}
 	public String getImage() {
 		return image;
 	}

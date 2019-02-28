@@ -100,6 +100,10 @@
 				<form:input path="tag" />
 			</p>
 			<p>
+				<form:label path="image">Image: </form:label>
+				<form:input path="image" />
+			</p>
+			<p>
 				<form:errors class="danger" path="tag" />
 			</p>
 			<input type="submit" value="Create Category" class="button success">

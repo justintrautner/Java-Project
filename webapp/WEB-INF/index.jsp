@@ -217,7 +217,7 @@
 			<c:forEach items="${cats }" var="cat">
 				<div
 					class="cell medium-4 small-12 mb-2 hover-opacity image-hover-wrapper">
-					<a href="/shop"> <img src="https://via.placeholder.com/350x350"
+					<a href="/shop"> <img src="${cat.image}"
 						alt=""> <span class="image-hover-wrapper-reveal">
 							<p class="h2">
 								<c:out value="${cat.tag}" />

@@ -26,6 +26,8 @@ public class Category {
     private Long id;
     @Size(min=1, message="Cannot be empty")
     private String tag;
+    @Size(min=1, message="Cannot be empty")
+    private String image;
     @Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
@@ -50,6 +52,12 @@ public class Category {
     public Category() {
     }
     
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -91,7 +91,10 @@
 	<!-- Body -->
 	<div class="grid-container" id="hadj">
 
+		<div class="grid-x align-justify align-middle">
 		<h1>Admin</h1>
+		<a href="/logout" class="button alert">Logout</a>
+		</div>
 		<a class="button success" href="/admincreatewine">Create Wine</a> <a
 			class="button success" href="/admincreatecategory">Create
 			Category</a>
