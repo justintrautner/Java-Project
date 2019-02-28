@@ -38,7 +38,9 @@ public class RoutingController {
 			cart.add(total);
 			session.setAttribute("cart", cart);
 		}
+		List<Wine> featuredWines = wineService.findByIsFeaturedTrue();
 		List<Category> cats =catService.findAll();
+		model.addAttribute("featuredWines", featuredWines);
 		model.addAttribute("cats", cats);
 		model.addAttribute("cart", session.getAttribute("cart"));
 		return "index.jsp";

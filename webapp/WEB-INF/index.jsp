@@ -25,7 +25,7 @@
 		<ul class="vertical menu accordion-menu" data-accordion-menu>
 			<li><a href="/cart" id="cart-tag"> <i
 					class="fi-shopping-cart" id="lg-cart"></i> <span
-					class="badge primary cart-total" id="cart-badge"> <c:out
+					class="badge primary cart-total-mobile" id="cart-badge"> <c:out
 							value="${cart[0].total}" /></span>
 			</a></li>
 			<li><a href="/shop" class="">Shop</a>
@@ -69,7 +69,7 @@
 					<li><button type="button" class="button">Search</button></li>
 					<li><a href="/cart" id="cart-tag"> <i
 							class="fi-shopping-cart" id="lg-cart"></i> <span
-							class="badge primary" id="cart-badge"><c:out
+							class="badge primary cart-total" id="cart-badge"><c:out
 									value="${cart[0].total}" /></span>
 					</a></li>
 				</ul>
@@ -131,83 +131,36 @@
 			<h1 class="m-0">FEATURED WINES</h1>
 		</div>
 		<hr>
-		<div class="grid-x grid-margin-x">
-			<div class="cell medium-auto small-12">
-				<div class="card">
-					<img src="https://via.placeholder.com/200x200" alt="">
-					<div class="card-section">
-						<div class="flex-container align-justify align-middle">
-							<h4>Wine</h4>
-							<h5>$19.99</h5>
-						</div>
-						<p>lloreum ipsum</p>
-						<div class="flex-container align-right">
-							<button class="hollow button expanded" href="#">
-								<div class="flex-container align-justify">
-									Add to Cart <i class="fi-shopping-cart"></i>
-								</div>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="cell medium-auto small-12">
-				<div class="card">
-					<img src="https://via.placeholder.com/200x200" alt="">
-					<div class="card-section">
-						<div class="flex-container align-justify align-middle">
-							<h4>Wine</h4>
-							<h5>$19.99</h5>
-						</div>
-						<p>lloreum ipsum</p>
-						<div class="flex-container align-right">
-							<button class="hollow button expanded" href="#">
-								<div class="flex-container align-justify">
-									Add to Cart <i class="fi-shopping-cart"></i>
-								</div>
-							</button>
+		<div class="grid-x grid-margin-x align-spaced">
+			<c:forEach items="${featuredWines }" var="wine">
+				<div class="cell medium-3 small-12">
+					<div class="card">
+						<img src="${wine.image }" alt="">
+						<div class="card-section">
+							<div class="flex-container align-justify align-middle">
+								<h4>
+									<a href="/wine${wine.id }"> <c:out value="${wine.name }" />
+									</a>
+								</h4>
+								<h5>
+									$
+									<c:out value="${wine.price }" />
+								</h5>
+							</div>
+							<p>
+								<c:out value="${wine.description }" />
+							</p>
+							<div class="flex-container align-right">
+								<button class="hollow button expanded add-to-cart" value="${wine.id}">
+									<div class="flex-container align-justify">
+										Add to Cart <i class="fi-shopping-cart"></i>
+									</div>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="cell medium-auto small-12">
-				<div class="card">
-					<img src="https://via.placeholder.com/200x200" alt="">
-					<div class="card-section">
-						<div class="flex-container align-justify align-middle">
-							<h4>Wine</h4>
-							<h5>$19.99</h5>
-						</div>
-						<p>lloreum ipsum</p>
-						<div class="flex-container align-right">
-							<button class="hollow button expanded" href="#">
-								<div class="flex-container align-justify">
-									Add to Cart <i class="fi-shopping-cart"></i>
-								</div>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="cell medium-auto small-12">
-				<div class="card">
-					<img src="https://via.placeholder.com/200x200" alt="">
-					<div class="card-section">
-						<div class="flex-container align-justify align-middle">
-							<h4>Wine</h4>
-							<h5>$19.99</h5>
-						</div>
-						<p>lloreum ipsum</p>
-						<div class="flex-container align-right">
-							<button class="hollow button expanded" href="#">
-								<div class="flex-container align-justify">
-									Add to Cart <i class="fi-shopping-cart"></i>
-								</div>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 	<div class="grid-container mb-5">
@@ -217,8 +170,8 @@
 			<c:forEach items="${cats }" var="cat">
 				<div
 					class="cell medium-4 small-12 mb-2 hover-opacity image-hover-wrapper">
-					<a href="/shop"> <img src="${cat.image}"
-						alt=""> <span class="image-hover-wrapper-reveal">
+					<a href="/shop"> <img src="${cat.image}" alt=""> <span
+						class="image-hover-wrapper-reveal">
 							<p class="h2">
 								<c:out value="${cat.tag}" />
 							</p>

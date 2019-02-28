@@ -110,6 +110,7 @@
 								<th>Image</th>
 								<th>Price</th>
 								<th>Category</th>
+								<th>Featured</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -123,6 +124,7 @@
 									<td><c:forEach items="${wine.categories}" var="cat">
 											<c:out value="${cat.tag}" />
 										</c:forEach></td>
+										<td><c:out value="${wine.isFeatured}" /></td>
 									<td><a class="button warning" href="/editwine${wine.id }">Edit</a>
 										<a class="button alert" href="/delete/wine/${wine.id }">Delete</a>
 									</td>

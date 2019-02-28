@@ -25,4 +25,6 @@ public interface WineRepo extends CrudRepository<Wine, Long> {
 	@Query(value = "SELECT * FROM wines JOIN wine_categories ON wines.id=wine_categories.wine_id WHERE wines.price < ?2 AND wine_categories.category_id=?1", nativeQuery=true)
 	List<Wine> findByCatIdAndPriceLessThan(long catId, Float val);
 
+	List<Wine> findByIsFeaturedTrue();
+
 }

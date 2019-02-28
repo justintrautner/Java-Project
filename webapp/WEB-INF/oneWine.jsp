@@ -94,7 +94,7 @@
 	<div class="grid-container" id="hadj">
 		<div class="grid-x grid-padding-x grid-margin-x">
 			<div class="cell small-12 medium-6">
-				<img class="thumbnail" src="https://placehold.it/500x350">
+				<img class="thumbnail" src="${wine.image}">
 			</div>
 			<div class="cell small-12 medium-6">
 				<div class="flex-container align-justify">

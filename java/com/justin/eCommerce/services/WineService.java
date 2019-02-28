@@ -72,4 +72,9 @@ public class WineService {
 		return wineRepo.save(updatedWine);
 	}
 
+	public List<Wine> findByIsFeaturedTrue() {
+		
+		return wineRepo.findByIsFeaturedTrue();
+	}
+
 }

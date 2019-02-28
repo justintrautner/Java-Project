@@ -115,6 +115,21 @@
 				<form:label path="price">Price: </form:label>
 				<form:input path="price" value="${wine.price}" />
 			</p>
+			<p>
+				<form:label path="isFeatured">Featured: </form:label>
+				<form:select path="isFeatured">
+					<c:choose>
+					<c:when test="${wine.isFeatured==true }">
+					<option value="true">True</option>
+					<option value="false">False</option>
+					</c:when>
+					<c:otherwise>
+					<option value="false">False</option>
+					<option value="true">True</option>
+					</c:otherwise>
+					</c:choose>
+				</form:select>
+			</p>
 			<input type="submit" value="Confirm Edit" class="button success">
 		</form:form>
 		<h3>Add Category</h3>
