@@ -18,7 +18,6 @@
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
 <body>
-
 	<div class="off-canvas position-left" id="offCanvas" data-off-canvas>
 		<!-- Mobile Menu -->
 		<ul class="vertical menu accordion-menu" data-accordion-menu>
