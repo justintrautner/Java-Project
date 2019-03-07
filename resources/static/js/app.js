@@ -15,7 +15,7 @@ $(document).foundation().ready(function() {
 		})
 		self.addClass("spin-cw").addClass("slow");
 		$(".cart-total").text(parseInt($(".cart-total").text()) + 1);
-		$(".cart-total-mobile").text(parseInt($(".cart-total").text()) + 1);
+		$(".cart-total-mobile").text(parseInt($(".cart-total").text()));
 		setTimeout(function() {
 			self.removeClass('spin-cw');
 		}, 750);
